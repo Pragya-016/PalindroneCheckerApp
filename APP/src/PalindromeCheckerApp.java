@@ -100,5 +100,32 @@ public class PalindromeCheckerApp {
         }
 
         System.out.println("Using Queue & Stack - Is Palindrome? : " + isPalindrome);
+
+        System.out.println("\n--- Deque (Front vs Rear) Demonstration ---");
+
+        Deque<Character> deque = new LinkedList<>();
+
+// Insert characters into Deque
+        for (int i = 0; i < input.length(); i++) {
+            deque.addLast(input.charAt(i));  // Insert at rear
+        }
+
+        isPalindrome = true;
+
+// Compare front and rear until deque is empty or has 1 element
+        while (deque.size() > 1) {
+
+            char front = deque.removeFirst();  // Remove from front
+            char rear = deque.removeLast();    // Remove from rear
+
+            System.out.println("Front: " + front + " | Rear: " + rear);
+
+            if (front != rear) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        System.out.println("Using Deque - Is Palindrome? : " + isPalindrome);
     }
 }
