@@ -127,5 +127,72 @@ public class PalindromeCheckerApp {
         }
 
         System.out.println("Using Deque - Is Palindrome? : " + isPalindrome);
+
+        // ==============================
+// UC8: Linked List Based Palindrome Checker
+// ==============================
+
+        System.out.println("\n--- Linked List Palindrome Check ---");
+
+// Create Singly Linked List from input
+        class Node {
+            char data;
+            Node next;
+            Node(char data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+// Convert string to linked list
+        Node head = null, tail = null;
+
+        for (int i = 0; i < input.length(); i++) {
+            Node newNode = new Node(input.charAt(i));
+            if (head == null) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
+
+// Fast and Slow pointer to find middle
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+// Reverse second half (in-place)
+        Node prev = null;
+        Node current = slow;
+
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextNode;
+        }
+
+// Compare first half and reversed second half
+        Node firstHalf = head;
+        Node secondHalf = prev;
+
+        isPalindrome = true;
+
+        while (secondHalf != null) {
+            if (firstHalf.data != secondHalf.data) {
+                isPalindrome = false;
+                break;
+            }
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+
+        System.out.println("Using Singly Linked List - Is Palindrome? : " + isPalindrome);
     }
 }
