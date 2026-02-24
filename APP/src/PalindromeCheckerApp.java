@@ -29,5 +29,29 @@ public class PalindromeCheckerApp {
         System.out.println("Reversed text: " + reversed);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
 
+        char[] chars = input.toCharArray();
+
+        // Initialize pointers
+        int start = 0;
+        int end = chars.length - 1;
+
+        isPalindrome = true;
+
+        // Two-pointer comparison
+        while (start < end) {
+
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
+        }
+
+        // Display result
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+
     }
 }
