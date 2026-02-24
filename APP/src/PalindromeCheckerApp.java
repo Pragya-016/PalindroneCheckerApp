@@ -194,5 +194,35 @@ public class PalindromeCheckerApp {
         }
 
         System.out.println("Using Singly Linked List - Is Palindrome? : " + isPalindrome);
+        // ==============================
+// UC9: Recursive Palindrome Checker
+// ==============================
+
+        System.out.println("\n--- Recursive Palindrome Check ---");
+
+// Recursive helper using start & end index
+        class RecursiveChecker {
+            boolean check(String str, int start, int end) {
+
+                // Base condition
+                if (start >= end) {
+                    return true;
+                }
+
+                // Compare start & end characters
+                if (str.charAt(start) != str.charAt(end)) {
+                    return false;
+                }
+
+                // Recursive call
+                return check(str, start + 1, end - 1);
+            }
+        }
+
+        RecursiveChecker rc = new RecursiveChecker();
+        isPalindrome = rc.check(input, 0, input.length() - 1);
+
+        System.out.println("Using Recursion (Call Stack) - Is Palindrome? : " + isPalindrome);
+
     }
 }
