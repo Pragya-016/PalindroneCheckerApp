@@ -342,8 +342,78 @@ public class PalindromeCheckerApp {
                 return true;
             }
         }
+        // UC13: Performance Comparison of Palindrome Algorithms
 
+        System.out.println("\n--- UC13: Performance Comparison ---");
 
+        // 1. Two Pointer Approach
+        long startTime = System.nanoTime();
+
+        boolean result1 = true;
+        int leftPtr = 0;
+        int rightPtr = input.length() - 1;
+
+        while (leftPtr < rightPtr) {
+            if (input.charAt(leftPtr) != input.charAt(rightPtr)) {
+                result1 = false;
+                break;
+            }
+            leftPtr++;
+            rightPtr--;
+        }
+
+        long endTime = System.nanoTime();
+        long twoPointerTime = endTime - startTime;
+
+        // 2. Stack Strategy
+        startTime = System.nanoTime();
+
+        Stack<Character> stackTest = new Stack<>();
+        for(char c : input.toCharArray()){
+            stackTest.push(c);
+        }
+
+        boolean result2 = true;
+
+        for(int i=0;i<input.length();i++){
+            if(input.charAt(i) != stackTest.pop()){
+                result2 = false;
+                break;
+            }
+        }
+
+        endTime = System.nanoTime();
+        long stackTime = endTime - startTime;
+
+        // 3. Deque Strategy
+        startTime = System.nanoTime();
+
+        Deque<Character> dequeTest = new LinkedList<>();
+
+        for(char c : input.toCharArray()){
+            dequeTest.addLast(c);
+        }
+
+        boolean result3 = true;
+
+        while(dequeTest.size() > 1){
+
+            char front = dequeTest.removeFirst();
+            char rear = dequeTest.removeLast();
+
+            if(front != rear){
+                result3 = false;
+                break;
+            }
+        }
+
+        endTime = System.nanoTime();
+        long dequeTime = endTime - startTime;
+
+        // Display Results
+        System.out.println("Two Pointer Result : " + result1 + " | Time : " + twoPointerTime + " ns");
+        System.out.println("Stack Result       : " + result2 + " | Time : " + stackTime + " ns");
+        System.out.println("Deque Result       : " + result3 + " | Time : " + dequeTime + " ns");
 
     }
 }
