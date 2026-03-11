@@ -1,48 +1,80 @@
+ABHINAV SHAJI (RA2411026010500)
+
+        2:36 PM (0 minutes ago)
+
+
+        to me
 import java.util.*;
+
+class PalindromeChecker {
+
+    // Encapsulated method
+    public boolean checkPalindrome(String input) {
+
+        char[] chars = input.toCharArray();
+
+        int start = 0;
+        int end = chars.length - 1;
+
+        while (start < end) {
+
+            if (chars[start] != chars[end]) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
+
 public class PalindromeCheckerApp {
     public static void main(String [] args){
+
         System.out.println("Welcome to Palindrome Checker App Management sytem");
+
         String input="madam";
         boolean isPalindrome=true;
+
         for(int i=0;i<input.length()/2;i++){
             if(input.charAt(i)!=input.charAt(input.length()-1-i)){
                 isPalindrome=false;
                 break;
             }
         }
+
         if(isPalindrome){
             System.out.println("it is a palindrome");
         }else{
             System.out.println("not a palindrome");
         }
+
         if(isPalindrome){
             System.out.println("it is a palindrome");
         }else{
             System.out.println("not a palindrome");
         }
+
         String reversed = "";
 
-// Iterate from the last character to the first
         for (int i = input.length() - 1; i >= 0; i--) {
             reversed = reversed + input.charAt(i);
         }
 
-// Compare original and reversed string
         isPalindrome = input.equals(reversed);
 
-// Display results
         System.out.println("Reversed text: " + reversed);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
 
         char[] chars = input.toCharArray();
 
-// Initialize pointers
         int start = 0;
         int end = chars.length - 1;
 
         isPalindrome = true;
 
-// Two-pointer comparison
         while (start < end) {
 
             if (chars[start] != chars[end]) {
@@ -54,7 +86,6 @@ public class PalindromeCheckerApp {
             end--;
         }
 
-// Display result
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
 
@@ -69,7 +100,6 @@ public class PalindromeCheckerApp {
             end--;
         }
 
-// Display result
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
 
@@ -82,19 +112,17 @@ public class PalindromeCheckerApp {
         Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-// Enqueue (FIFO) and Push (LIFO)
         for (int i = 0; i < input.length(); i++) {
-            queue.add(input.charAt(i));   // Enqueue
-            stack.push(input.charAt(i));  // Push
+            queue.add(input.charAt(i));
+            stack.push(input.charAt(i));
         }
 
         isPalindrome = true;
 
-// Compare Dequeue vs Pop
         while (!queue.isEmpty()) {
 
-            char fromQueue = queue.remove(); // Dequeue (FIFO)
-            char fromStack = stack.pop();    // Pop (LIFO)
+            char fromQueue = queue.remove();
+            char fromStack = stack.pop();
 
             System.out.println("Queue (FIFO): " + fromQueue +
                     " | Stack (LIFO): " + fromStack);
@@ -113,18 +141,16 @@ public class PalindromeCheckerApp {
 
         Deque<Character> deque = new LinkedList<>();
 
-// Insert characters into Deque
         for (int i = 0; i < input.length(); i++) {
-            deque.addLast(input.charAt(i));  // Insert at rear
+            deque.addLast(input.charAt(i));
         }
 
         isPalindrome = true;
 
-// Compare front and rear until deque is empty or has 1 element
         while (deque.size() > 1) {
 
-            char front = deque.removeFirst();  // Remove from front
-            char rear = deque.removeLast();    // Remove from rear
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
 
             System.out.println("Front: " + front + " | Rear: " + rear);
 
@@ -140,7 +166,6 @@ public class PalindromeCheckerApp {
 
         System.out.println("\n--- Linked List Palindrome Check ---");
 
-// Create Singly Linked List from input
         class Node {
             char data;
             Node next;
@@ -150,7 +175,6 @@ public class PalindromeCheckerApp {
             }
         }
 
-// Convert string to linked list
         Node head = null, tail = null;
 
         for (int i = 0; i < input.length(); i++) {
@@ -164,7 +188,6 @@ public class PalindromeCheckerApp {
             }
         }
 
-// Fast and Slow pointer to find middle
         Node slow = head;
         Node fast = head;
 
@@ -173,7 +196,6 @@ public class PalindromeCheckerApp {
             fast = fast.next.next;
         }
 
-// Reverse second half (in-place)
         Node prev = null;
         Node current = slow;
 
@@ -184,7 +206,6 @@ public class PalindromeCheckerApp {
             current = nextNode;
         }
 
-// Compare first half and reversed second half
         Node firstHalf = head;
         Node secondHalf = prev;
 
@@ -205,7 +226,6 @@ public class PalindromeCheckerApp {
 
         System.out.println("\n--- Recursive Palindrome Check ---");
 
-// Recursive helper using start & end index
         class RecursiveChecker {
             boolean check(String str, int start, int end) {
 
@@ -233,7 +253,6 @@ public class PalindromeCheckerApp {
 
         String text = "Madam In Eden Im Adam";
 
-        // Normalize string
         String normalized = text.replaceAll("\\s+", "").toLowerCase();
 
         System.out.println("Original Text : " + text);
@@ -243,7 +262,6 @@ public class PalindromeCheckerApp {
         int right = normalized.length() - 1;
 
         isPalindrome = true;
-
 
         while (left < right) {
             if (normalized.charAt(left) != normalized.charAt(right)) {
@@ -255,5 +273,17 @@ public class PalindromeCheckerApp {
         }
 
         System.out.println("Ignoring Spaces & Case - Is Palindrome? : " + isPalindrome);
+
+        //***************************************11
+        // UC11: Encapsulation using PalindromeChecker class
+
+        System.out.println("\n--- UC11: Encapsulated Palindrome Check ---");
+
+        PalindromeChecker checker = new PalindromeChecker();
+
+        isPalindrome = checker.checkPalindrome(input);
+
+        System.out.println("Using Encapsulation (PalindromeChecker Class) - Is Palindrome? : " + isPalindrome);
+
     }
 }
