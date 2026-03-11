@@ -1,9 +1,3 @@
-ABHINAV SHAJI (RA2411026010500)
-
-        2:36 PM (0 minutes ago)
-
-
-        to me
 import java.util.*;
 
 class PalindromeChecker {
@@ -29,6 +23,33 @@ class PalindromeChecker {
         return true;
     }
 }
+// UC12: Strategy Pattern
+
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+// Stack based strategy
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) != stack.pop()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
 
 public class PalindromeCheckerApp {
     public static void main(String [] args){
@@ -284,6 +305,45 @@ public class PalindromeCheckerApp {
         isPalindrome = checker.checkPalindrome(input);
 
         System.out.println("Using Encapsulation (PalindromeChecker Class) - Is Palindrome? : " + isPalindrome);
+        // Deque based strategy        //***************************************12
+        // UC12: Dynamic Strategy Selection
+
+        System.out.println("\n--- UC12: Strategy Pattern Palindrome Check ---");
+
+        PalindromeStrategy strategy;
+
+        // Choose algorithm dynamically
+        strategy = new StackStrategy();
+        // strategy = new DequeStrategy();  // switch algorithm if needed
+
+        boolean result = strategy.check(input);
+
+        System.out.println("Using Strategy Pattern - Is Palindrome? : " + result);
+        class DequeStrategy implements PalindromeStrategy {
+
+            public boolean check(String input) {
+
+                Deque<Character> deque = new LinkedList<>();
+
+                for (char c : input.toCharArray()) {
+                    deque.addLast(c);
+                }
+
+                while (deque.size() > 1) {
+
+                    char front = deque.removeFirst();
+                    char rear = deque.removeLast();
+
+                    if (front != rear) {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
+
+
 
     }
 }
