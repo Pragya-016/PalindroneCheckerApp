@@ -1,15 +1,20 @@
 import java.util.*;
 public class PalindromeCheckerApp {
-    public static void main(String[] args){
-        System.out.println("Welcome to palindrome checker app management system");
+    public static void main(String [] args){
+        System.out.println("Welcome to Palindrome Checker App Management sytem");
         String input="madam";
         boolean isPalindrome=true;
         for(int i=0;i<input.length()/2;i++){
-             if(input.charAt(i)!=input.charAt(input.length()-1-i)){
-                 isPalindrome=false;
-                 break;
-             }
-         }
+            if(input.charAt(i)!=input.charAt(input.length()-1-i)){
+                isPalindrome=false;
+                break;
+            }
+        }
+        if(isPalindrome){
+            System.out.println("it is a palindrome");
+        }else{
+            System.out.println("not a palindrome");
+        }
         if(isPalindrome){
             System.out.println("it is a palindrome");
         }else{
@@ -17,27 +22,27 @@ public class PalindromeCheckerApp {
         }
         String reversed = "";
 
-        // Iterate from the last character to the first
+// Iterate from the last character to the first
         for (int i = input.length() - 1; i >= 0; i--) {
             reversed = reversed + input.charAt(i);
         }
 
-        // Compare original and reversed string
+// Compare original and reversed string
         isPalindrome = input.equals(reversed);
 
-        // Display results
+// Display results
         System.out.println("Reversed text: " + reversed);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
 
         char[] chars = input.toCharArray();
 
-        // Initialize pointers
+// Initialize pointers
         int start = 0;
         int end = chars.length - 1;
 
         isPalindrome = true;
 
-        // Two-pointer comparison
+// Two-pointer comparison
         while (start < end) {
 
             if (chars[start] != chars[end]) {
@@ -49,13 +54,10 @@ public class PalindromeCheckerApp {
             end--;
         }
 
-        // Display result
+// Display result
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
 
-        // Initialize pointers
-
-        // Two-pointer comparison
         while (start < end) {
 
             if (chars[start] != chars[end]) {
@@ -67,28 +69,32 @@ public class PalindromeCheckerApp {
             end--;
         }
 
-        // Display result
+// Display result
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
+
+        // ==============================
+        // UC6: FIFO vs LIFO Demonstration
+        // ==============================
 
         System.out.println("\n--- FIFO vs LIFO Demonstration ---");
 
         Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // Enqueue and Push characters
+// Enqueue (FIFO) and Push (LIFO)
         for (int i = 0; i < input.length(); i++) {
-            queue.add(input.charAt(i));   // Enqueue (FIFO)
-            stack.push(input.charAt(i));  // Push (LIFO)
+            queue.add(input.charAt(i));   // Enqueue
+            stack.push(input.charAt(i));  // Push
         }
 
         isPalindrome = true;
 
-        // Compare dequeue (FIFO) and pop (LIFO)
+// Compare Dequeue vs Pop
         while (!queue.isEmpty()) {
 
-            char fromQueue = queue.remove(); // Dequeue
-            char fromStack = stack.pop();    // Pop
+            char fromQueue = queue.remove(); // Dequeue (FIFO)
+            char fromStack = stack.pop();    // Pop (LIFO)
 
             System.out.println("Queue (FIFO): " + fromQueue +
                     " | Stack (LIFO): " + fromStack);
@@ -100,6 +106,8 @@ public class PalindromeCheckerApp {
         }
 
         System.out.println("Using Queue & Stack - Is Palindrome? : " + isPalindrome);
+
+        // ************************************************7
 
         System.out.println("\n--- Deque (Front vs Rear) Demonstration ---");
 
@@ -128,9 +136,7 @@ public class PalindromeCheckerApp {
 
         System.out.println("Using Deque - Is Palindrome? : " + isPalindrome);
 
-        // ==============================
-// UC8: Linked List Based Palindrome Checker
-// ==============================
+        //*************************************8
 
         System.out.println("\n--- Linked List Palindrome Check ---");
 
@@ -194,9 +200,8 @@ public class PalindromeCheckerApp {
         }
 
         System.out.println("Using Singly Linked List - Is Palindrome? : " + isPalindrome);
-        // ==============================
-// UC9: Recursive Palindrome Checker
-// ==============================
+
+        //***************************************9
 
         System.out.println("\n--- Recursive Palindrome Check ---");
 
@@ -204,17 +209,14 @@ public class PalindromeCheckerApp {
         class RecursiveChecker {
             boolean check(String str, int start, int end) {
 
-                // Base condition
                 if (start >= end) {
                     return true;
                 }
 
-                // Compare start & end characters
                 if (str.charAt(start) != str.charAt(end)) {
                     return false;
                 }
 
-                // Recursive call
                 return check(str, start + 1, end - 1);
             }
         }
@@ -224,5 +226,34 @@ public class PalindromeCheckerApp {
 
         System.out.println("Using Recursion (Call Stack) - Is Palindrome? : " + isPalindrome);
 
+        //***************************************10
+        // UC10: Case-Insensitive & Space-Ignored Palindrome
+
+        System.out.println("\n--- UC10: Case-Insensitive & Space-Ignored Palindrome ---");
+
+        String text = "Madam In Eden Im Adam";
+
+        // Normalize string
+        String normalized = text.replaceAll("\\s+", "").toLowerCase();
+
+        System.out.println("Original Text : " + text);
+        System.out.println("Normalized Text : " + normalized);
+
+        int left = 0;
+        int right = normalized.length() - 1;
+
+        isPalindrome = true;
+
+
+        while (left < right) {
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                isPalindrome = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+
+        System.out.println("Ignoring Spaces & Case - Is Palindrome? : " + isPalindrome);
     }
 }
